@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!-- design-director asset: A4 竖版 Swiss editorial 海报骨架（实证交付版提炼）。
+     用法：替换 __PHOTO_B64__ 为照片 base64（或改 img src），改文案；
+     正式印刷前把 Google Fonts link 换成本地 @font-face（印刷机/离线渲染取不到 CDN）；
+     Chrome 打印 PDF 时 @page margin 0 与 print-color-adjust 依赖本文件 CSS。
+     风格切换：改 --bg/--ink/--red 三变量与字体族即可转其他秩序谱系风格。 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>王禹超 · 人物海报</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Inter:ital,wght@0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #F6F3EC;
+    --ink: #23201C;
+    --muted: rgba(35, 32, 28, .64);
+    --faint: rgba(35, 32, 28, .40);
+    --red: #C5402B;
+    --line: rgba(35, 32, 28, .16);
+  }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+
+  .poster {
+    width: 794px;
+    height: 1123px; /* A4 竖版 @96dpi (210×297mm) */
+    position: relative;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
+    overflow: hidden;
+  }
+
+  /* ---- background: graph-paper grid + faint physics formulas ---- */
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(96, 116, 150, .10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(96, 116, 150, .10) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .formula {
+    position: absolute;
+    font-family: 'Noto Serif SC', 'Songti SC', serif;
+    color: rgba(35, 32, 28, .07);
+    white-space: nowrap;
+  }
+  .f1 { font-family: 'Inter', 'Helvetica Neue', sans-serif; font-style: italic; font-size: 40px; top: 148px; right: 60px; }
+  .f2 { font-size: 28px; bottom: 150px; left: 60px; }
+  .f3 { font-family: 'Inter', 'Helvetica Neue', sans-serif; font-style: italic; font-size: 21px; bottom: 64px; right: 60px; }
+
+  .inner { position: relative; height: 100%; display: flex; flex-direction: column; padding: 52px 60px 44px; }
+
+  /* ---- top meta ---- */
+  .meta-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 16px; letter-spacing: 4px; color: var(--muted); font-weight: 500;
+  }
+  .meta-left .dot {
+    display: inline-block; width: 9px; height: 9px; background: var(--red);
+    margin-right: 12px; vertical-align: 1px;
+  }
+
+  /* ---- hero name ---- */
+  .name {
+    margin-top: 26px;
+    font-family: 'Noto Serif SC', 'Songti SC', serif;
+    font-weight: 900; font-size: 138px; line-height: 1.02;
+    letter-spacing: 10px; color: var(--ink);
+  }
+  .latin {
+    margin-top: 16px;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 17px; letter-spacing: 13px; color: var(--faint); font-weight: 600;
+  }
+  .rule { margin-top: 24px; height: 1px; background: var(--line); position: relative; }
+  .rule::before {
+    content: ""; position: absolute; left: 0; top: -1px;
+    height: 3px; width: 96px; background: var(--red);
+  }
+
+  /* ---- hero row: copy + photo ---- */
+  .hero-row { display: flex; gap: 40px; margin-top: 30px; align-items: stretch; }
+  .hero-copy { flex: 1; min-width: 0; }
+  .kicker {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 16px; letter-spacing: 5px; color: var(--red); font-weight: 700;
+  }
+  .title { margin-top: 14px; font-size: 48px; font-weight: 800; line-height: 1.3; letter-spacing: 2px; }
+  .title em { font-style: normal; color: var(--red); }
+  .lead { margin-top: 16px; font-size: 24px; line-height: 1.65; color: var(--muted); text-align: left; }
+
+  .photo {
+    width: 234px; flex: none;
+    border: 1px solid rgba(35, 32, 28, .24);
+    padding: 10px 10px 8px; background: #FFFDF8;
+  }
+  .photo img { display: block; width: 100%; height: 278px; object-fit: cover; object-position: center top; }
+  .photo figcaption {
+    margin-top: 8px; font-size: 16px; letter-spacing: 3px;
+    color: var(--faint); text-align: center;
+  }
+
+  /* ---- award band: seal + text ---- */
+  .award { display: flex; align-items: center; gap: 38px; margin-top: 32px; }
+  .seal {
+    width: 156px; height: 166px; flex: none;
+    border: 4px solid var(--red);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .seal span {
+    writing-mode: vertical-rl; text-orientation: upright; white-space: nowrap;
+    font-family: 'Noto Serif SC', 'Songti SC', serif;
+    font-weight: 900; font-size: 42px; letter-spacing: 6px; color: var(--red);
+  }
+  .award-copy { flex: 1; min-width: 0; }
+  .award-latin {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 16px; letter-spacing: 4px; color: var(--red); font-weight: 700;
+  }
+  .award-name { margin-top: 12px; font-size: 26px; font-weight: 700; line-height: 1.5; letter-spacing: 1px; }
+
+  /* ---- stats ---- */
+  .stats { display: flex; align-items: stretch; gap: 44px; margin-top: 32px; }
+  .stat { min-width: 0; }
+  .stat-num {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-weight: 900; font-size: 64px; line-height: 1;
+    color: var(--ink); letter-spacing: -1px;
+  }
+  .stat-num em {
+    font-style: normal; font-size: 22px; color: var(--red);
+    margin-left: 8px; letter-spacing: 2px;
+    font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; font-weight: 700;
+  }
+  .stat-label { margin-top: 12px; font-size: 16px; letter-spacing: 3px; color: var(--muted); }
+  .stat-sep { width: 1px; background: var(--line); }
+
+  /* ---- lab status ---- */
+  .status { display: flex; align-items: baseline; gap: 18px; margin-top: 30px; }
+  .status-label { font-size: 16px; color: var(--red); font-weight: 700; letter-spacing: 4px; flex: none; }
+  .status-text { font-size: 24px; color: var(--ink); line-height: 1.5; }
+
+  /* ---- footer (pinned to bottom, absorbs leftover space) ---- */
+  .footer { margin-top: auto; padding-top: 18px; }
+  .foot-rule { height: 1px; background: var(--line); }
+  .foot-row {
+    display: flex; justify-content: space-between; margin-top: 18px;
+    font-size: 16px; letter-spacing: 3px; color: var(--muted);
+  }
+
+  /* ---- browser preview auto-scale ---- */
+  @media screen {
+    html { height: auto; display: flex; justify-content: center; background: #F6F3EC; }
+    body { transform-origin: top center; scale: min(1, calc(100vw / 794)); margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="bg-grid"></div>
+  <div class="formula f1">E = mc²</div>
+  <div class="formula f2">Δx·Δp ≥ ħ / 2</div>
+  <div class="formula f3">∇ × B = μ₀J + μ₀ε₀ ∂E/∂t</div>
+
+  <div class="inner">
+    <div class="meta-row">
+      <div class="meta-left"><span class="dot"></span>强基计划 · 251</div>
+      <div>STUDENT PROFILE — 2026</div>
+    </div>
+
+    <h1 class="name">王禹超</h1>
+    <div class="latin">WANG YUCHAO</div>
+    <div class="rule"></div>
+
+    <div class="hero-row">
+      <div class="hero-copy">
+        <div class="kicker">NATIONAL SCHOLARSHIP CONTENDER</div>
+        <div class="title">国家奖学金<br><em>竞逐者</em></div>
+        <p class="lead">手握特等奖与 3.85 绩点，正向国家奖学金发起最后冲刺。</p>
+      </div>
+      <figure class="photo">
+        <img src="data:image/jpeg;base64,__PHOTO_B64__" alt="王禹超照片">
+        <figcaption>档案照 · ARCHIVE</figcaption>
+      </figure>
+    </div>
+
+    <div class="award">
+      <div class="seal"><span>特等奖</span></div>
+      <div class="award-copy">
+        <div class="award-latin">GRAND PRIZE · CAMPUS SELECTION</div>
+        <div class="award-name">2026 年全国大学生物理实验竞赛<br>校内选拔赛</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">3.85</div>
+        <div class="stat-label">GPA · 学业绩点</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat">
+        <div class="stat-num">139<em>A4 级</em></div>
+        <div class="stat-label">智商 · IQ</div>
+      </div>
+    </div>
+
+    <div class="status">
+      <div class="status-label">近期动态</div>
+      <div class="status-text">突变体与过表达验证中 · 简称「打杂」</div>
+    </div>
+
+    <div class="footer">
+      <div class="foot-rule"></div>
+      <div class="foot-row">
+        <div>强基 251 · 王禹超</div>
+        <div>WANG YUCHAO · 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
