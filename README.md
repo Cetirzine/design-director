@@ -101,6 +101,20 @@ design-director/
     └── poster-template.html     # validated A4 Swiss editorial poster skeleton
 ```
 
+## Dependencies (required)
+
+This skill is a director, not a monolith — it deliberately delegates. **Three skills must be installed alongside it** (same skills directory), or the corresponding capabilities are missing:
+
+| Skill | Level | What it powers | Without it |
+|---|---|---|---|
+| `design-taste-frontend` | **Required** | All web engineering rules for the execution phase: dial system, typography discipline, pre-flight checklist, performance & accessibility | Web projects get style tokens but no engineering guardrails |
+| `anti-ai-slop` | **Required** | The full anti-slop checklist and countermeasures behind iron rule #3 | Anti-slop rule is reduced to a summary, no judgement criteria |
+| `anti-prompt-echo` | **Required** | The full test procedures behind iron rule #1 (necessity test, deletion test) | Prompt-echo scans run on intuition and miss cases |
+| `gov-admin-ui` | Optional | Routing target for Chinese government/institutional portal projects | Only that project type is affected |
+| `minimal-zine-poster` | Optional | Prompt compiler for pure image-generation posters | Only that deliverable type is affected |
+
+The interview protocol, style cards, and print pipeline in this repo are self-contained. The required trio powers the web execution path and the full quality gate; if one is missing, install it before running that path — never reconstruct its rules from memory.
+
 ## Installation
 
 Any agent that loads markdown skills (Claude Code, ZCode, and similar):
@@ -110,8 +124,16 @@ git clone https://github.com/Cetirzine/design-director.git \
   ~/.zcode/skills/design-director        # or your agent's skills directory
 ```
 
-No scripts, no dependencies — documentation-driven by design. The skill triggers on any design/typesetting request, or invoke it explicitly when style direction matters.
+Then obtain the three required skills (`design-taste-frontend`, `anti-ai-slop`, `anti-prompt-echo`) from their own sources and place them as sibling directories (`~/.zcode/skills/<name>/`). The final layout should read:
+
+```text
+~/.zcode/skills/
+├── design-director/          # this repo
+├── design-taste-frontend/    # required
+├── anti-ai-slop/             # required
+└── anti-prompt-echo/         # required
+```
 
 ## Credit
 
-Built on top of a working installation that includes `design-taste-frontend`, `anti-ai-slop`, `anti-prompt-echo`, `gov-admin-ui`, and `minimal-zine-poster` — this skill handles direction and routing and deliberately delegates rather than duplicates them.
+Operates as a layer over a working installation of `design-taste-frontend`, `anti-ai-slop`, `anti-prompt-echo`, `gov-admin-ui`, and `minimal-zine-poster` (see Dependencies) — this skill handles direction and routing and deliberately delegates rather than duplicates them.

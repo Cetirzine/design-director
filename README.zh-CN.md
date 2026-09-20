@@ -101,6 +101,20 @@ design-director/
     └── poster-template.html     # 已验证 A4 Swiss editorial 海报骨架
 ```
 
+## 依赖（必读）
+
+本 skill 是总监不是巨石——刻意委托而非重复。**必须同步安装三个 skill**（放在同一 skills 目录），缺装则对应能力缺失：
+
+| Skill | 级别 | 承担什么 | 缺了会怎样 |
+|---|---|---|---|
+| `design-taste-frontend` | **必装** | 网页执行阶段全部工程规则：dials 三表、字体纪律、Pre-Flight 清单、性能与无障碍 | 网页项目只有风格 token，没有工程护栏 |
+| `anti-ai-slop` | **必装** | 铁律三的完整检查清单与逐项对策、slop 评分表 | 反 slop 只剩摘要，缺判定细则 |
+| `anti-prompt-echo` | **必装** | 铁律一的完整测试流程（必要性测试、删除测试） | 回声扫描凭感觉，易漏判 |
+| `gov-admin-ui` | 按需 | 政务门户项目的分流目标 | 仅影响该类项目 |
+| `minimal-zine-poster` | 按需 | 纯生图海报的 prompt 编译器 | 仅影响该类交付物 |
+
+本仓库的访谈协议、风格卡、印刷管线自身完备；必装三件套驱动网页执行路线与完整质量门。缺装时先安装再跑对应路线——**绝不要凭记忆复述依赖 skill 的规则**，记忆版规则是 AI slop 的入口。
+
 ## 安装
 
 任何加载 markdown skill 的代理（Claude Code、ZCode 及同类）：
@@ -110,8 +124,16 @@ git clone https://github.com/Cetirzine/design-director.git \
   ~/.zcode/skills/design-director        # 或你的代理的 skills 目录
 ```
 
-无脚本、无依赖——刻意做成纯文档驱动。skill 在任何设计/排版请求上触发，也可在风格方向重要时显式调用。
+然后从各自来源获取三个必装 skill（`design-taste-frontend`、`anti-ai-slop`、`anti-prompt-echo`），作为兄弟目录放入。最终布局：
+
+```text
+~/.zcode/skills/
+├── design-director/          # 本仓库
+├── design-taste-frontend/    # 必装
+├── anti-ai-slop/             # 必装
+└── anti-prompt-echo/         # 必装
+```
 
 ## 致谢
 
-建立在一个包含 `design-taste-frontend`、`anti-ai-slop`、`anti-prompt-echo`、`gov-admin-ui`、`minimal-zine-poster` 的工作环境之上——本 skill 负责定向与路由，刻意委托而非重复它们。
+运行在 `design-taste-frontend`、`anti-ai-slop`、`anti-prompt-echo`、`gov-admin-ui`、`minimal-zine-poster` 的工作安装之上（见「依赖」）——本 skill 负责定向与路由，刻意委托而非重复它们。
